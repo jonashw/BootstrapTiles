@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Thumbnails</title>
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap-responsive.min.css" />
+	<link rel="stylesheet" href="BootstrapTiles.css" />
+	<script src="lib/jQuery.js"></script>
+	<script src="lib/Underscore.js"></script>
+	<script src="BootstrapTiles.js"></script>
+	<script>
+		$(function(){
+			setTimeout(function(){
+				$('.tiles').BootstrapTiles();
+			}, 1000);
+		});
+	</script>
+	<script src="lib/holder.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>Bootstrap Tiles</h1>
+		<p class="lead">
+			Because Bootstrap's <code>&lt;ul class="thumbnails">&lt;/ul></code> just doesn't <a href="BootstrapThumbnailTest.html">cut it</a>.
+		</p>
+		<ul>
+			<li>
+				Accepts items of any height
+			</li>
+			<li>
+				Maintains semi-order of items by placing items with an emptiest-column-first strategy
+			</li>
+			<li>
+				Uniform item widths are required (I'm using columns for organization)
+			</li>
+		</ul>
+		<pre>$('ul.items').BootstrapTiles();</pre>
+		<hr>
+		<p>
+			<span class="label">Note</span>
+			<br>
+			This demo takes a second to load, but that's only because I'm using <a href="https://github.com/imsky/holder">Holder</a> for test images,
+			and we must wait for the images to load before the height of the elements can be calculated.
+		</p>
+		<ul class="tiles">
+			<li class="tile">
+				<div>1</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x270/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>2</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x120/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>3</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x150/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>4</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x350/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>5</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x320/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>6</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x220/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>7</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x120/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>8</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x120/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>9</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x120/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>10</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x120/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>11</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x120/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>12</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x120/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>13</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x120/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>14</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x120/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>15</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x120/social">
+				</a>
+			</li>
+			<li class="tile">
+				<div>16</div>
+				<a href="#" class="thumbnail">
+					<img data-src="holder.js/100%x120/social">
+				</a>
+			</li>
+		</ul>
+	</div><!-- /.container -->		
+</body>
+</html>
