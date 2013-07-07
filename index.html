@@ -11,9 +11,33 @@
 	<script src="BootstrapTiles.js"></script>
 	<script>
 		$(function(){
-			setTimeout(function(){
-				$('.tiles').BootstrapTiles();
-			}, 1000);
+			var bt = $('.tiles').BootstrapTiles();
+			function arrange(columns){
+				bt.BootstrapTiles('arrange',{columns:columns});
+			}
+			function rotate(){
+				var delay = 1400;
+				setTimeout(function(){
+					arrange(3);
+					setTimeout(function(){
+						arrange(4);
+						setTimeout(function(){
+							arrange(6);
+							setTimeout(function(){
+								arrange(4);
+								setTimeout(function(){
+									arrange(2);
+									setTimeout(function(){
+										arrange(4);
+										rotate();
+									},delay);
+								},delay);
+							},delay);
+						},delay);
+					},delay);
+				}, delay);
+			}
+			rotate();
 		});
 	</script>
 	<script src="lib/holder.js"></script>
@@ -47,97 +71,97 @@
 			<li class="tile">
 				<div>1</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x270/social">
+					<img data-src="holder.js/230x270/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>2</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x120/social">
+					<img data-src="holder.js/230x120/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>3</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x150/social">
+					<img data-src="holder.js/230x150/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>4</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x350/social">
+					<img data-src="holder.js/230x350/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>5</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x320/social">
+					<img data-src="holder.js/230x320/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>6</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x220/social">
+					<img data-src="holder.js/230x220/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>7</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x120/social">
+					<img data-src="holder.js/230x120/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>8</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x120/social">
+					<img data-src="holder.js/230x120/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>9</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x120/social">
+					<img data-src="holder.js/230x120/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>10</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x120/social">
+					<img data-src="holder.js/230x120/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>11</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x120/social">
+					<img data-src="holder.js/230x120/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>12</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x120/social">
+					<img data-src="holder.js/230x120/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>13</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x120/social">
+					<img data-src="holder.js/230x120/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>14</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x120/social">
+					<img data-src="holder.js/230x120/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>15</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x120/social">
+					<img data-src="holder.js/230x120/social">
 				</a>
 			</li>
 			<li class="tile">
 				<div>16</div>
 				<a href="#" class="thumbnail">
-					<img data-src="holder.js/100%x120/social">
+					<img data-src="holder.js/230x120/social">
 				</a>
 			</li>
 		</ul>

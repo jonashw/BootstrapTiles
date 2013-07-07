@@ -1,21 +1,31 @@
-var grid;
 (function($){
-	function Grid(ul,columnCount){
-		var ul = ul;
+	//utility classes
+	function Grid(container,columnCount){
 		this.element = $('<div></div>').addClass('BootstrapTiles row-fluid');
-		this.element.insertAfter(ul);
-		ul.detach();
+		this.element.appendTo(container);
 		this.columns = [];
 		var columnClass = (function(){
 			return {
-				4: 'span3'	
+				 1: 'span12'	
+				,2: 'span6'	
+				,3: 'span4'	
+				,4: 'span3'	
+				,5: 'span3' //can't do any better than that
+				,6: 'span2'	
 			}[columnCount];
 		})();
 		for(var i=0; i<columnCount; i++){
-			var columnElement = $('<div></div>').addClass(columnClass).appendTo(this.element);
+			var columnElement = $('<ul></ul>').addClass(columnClass).appendTo(this.element);
 			this.columns.push(new Column(columnElement,i+1));
 		}
-		this.placeTile = function(tile){
+		this.placeTiles = function(tiles,sequentially){
+			var sequentially = !!sequentially;
+			var self = this;
+			tiles.each(function(){
+				self.placeTile($(this),sequentially);
+			});
+		};
+		this.placeTile = function(tile,sequentially){
 			var column = _.min(this.columns, function(column){
 				return column.height;
 			});
@@ -29,23 +39,55 @@ var grid;
 		this.height = 0;
 		var self = this;
 		this.addTile = function(li){
-			var tile = $('<div></div>').addClass('BootstrapTile').append(li.children());
+			var tile = li.addClass('BootstrapTile');
 			this.element.append(tile);
 			this.tiles.push(tile);
-			var pre_height = this.height;
-			this.height += tile.height();
-			var post_height = this.height;
-			console.log(tile,n,pre_height,tile.height(),post_height);
+			this.height = this.element.height();
 		};	
 	}
-	$.fn.BootstrapTiles = function(){
-		//the this keyword should be a collection of ul.tiles elements
-		this.each(function(){
+
+	//this is the module that will be controlled by the plugin
+	function BootstrapTiles(tiles,container){
+		this.tiles = tiles;
+		this.container = container;
+		this.grid = null;
+		this.arrange = function(columns,sequentially){
+			if(!!this.grid) var old = this.grid.element.hide();
+			this.grid = new Grid(this.container,columns);
+			this.grid.placeTiles(this.tiles,!!sequentially);
+			if(!!old) old.detach();
+		};
+	}
+
+	var defaults = {columns:4};
+	//here's the actual jQuery plugin
+	$.fn.BootstrapTiles = function(option,data){
+		//it has two usage patterns:
+		//	1. For initialization:
+		//		$('.myTileClass').BootstrapTiles({columns: 3}) 				
+		//	2. For re-arrangement, perhaps with a different number of columns:
+		//		$('.myTileClass').BootstrapTiles('arrange',{columns: 4});
+		//
+		//	You can choose one of the following column counts: (1,2,3,4,6)
+		var option = option || {};
+		var data = data || {};
+		var dataKey = 'bootstrapTiles';
+		return this.each(function(){
 			var ul = $(this);
-			grid = new Grid(ul,4);
-			ul.find('.tile').each(function(){
-				grid.placeTile($(this));
-			});
+			var bt = ul.data(dataKey);
+			if(typeof bt == 'undefined'){
+				var tiles = ul.find('.tile');
+				var container = ul.parent();
+				var settings = $.extend({}, defaults);
+				if(typeof option == 'object') settings = _.extend(settings, option);
+				var bt = new BootstrapTiles(tiles,container);
+				bt.arrange(settings.columns, true);
+				ul.data(dataKey,bt);
+			} else if (option == "arrange"){
+				var settings = $.extend({},defaults);
+				if(typeof data == 'object') settings = _.extend(settings, data);
+				bt.arrange(settings.columns, false);
+			}
 		});
 	};
 })(jQuery);
