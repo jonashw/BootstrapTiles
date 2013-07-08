@@ -11,33 +11,59 @@
 	<script src="BootstrapTiles.js"></script>
 	<script>
 		$(function(){
+			//basic application of the plugin
 			var bt = $('.tiles').BootstrapTiles();
-			function arrange(columns){
-				bt.BootstrapTiles('arrange',{columns:columns});
+
+			//Code for dynamic switching of column configuration/re-arrangement
+			var selected_arrange_simple = false;
+			var selected_columns = 4;
+			function arrange(){
+				//console.log('arrange', selected_columns, selected_arrange_simple);
+				bt.BootstrapTiles('arrange',{columns:selected_columns, simple:selected_arrange_simple});
 			}
-			function rotate(){
-				var delay = 1400;
-				setTimeout(function(){
-					arrange(3);
-					setTimeout(function(){
-						arrange(4);
-						setTimeout(function(){
-							arrange(6);
-							setTimeout(function(){
-								arrange(4);
-								setTimeout(function(){
-									arrange(2);
-									setTimeout(function(){
-										arrange(4);
-										rotate();
-									},delay);
-								},delay);
-							},delay);
-						},delay);
-					},delay);
-				}, delay);
-			}
-			rotate();
+			//placement style
+			(function(){
+				var container = $("<div></div>").addClass('pull-right').insertBefore($("#arrange-controls"));
+				var radios = [];
+				var controls = $([true,false]).map(function(x,b){
+					var label = $('<label></label>').addClass('radio inline');
+					var radio = $('<input/>').attr({name:'arrange-simple','type':'radio', 'value':b}).addClass('arrange-simple').appendTo(label);
+					radios.push(radio);
+					$('<span></span>').text(b).appendTo(label);
+					return label;	
+				}).appendTo(container);
+				var radios = $(radios);
+				var defaultRadio = $(radios.get(0));
+				defaultRadio.prop('checked',true);
+				container.on('change', '.arrange-simple', function(){
+					var checked = container.find('.arrange-simple:checked');
+					selected_arrange_simple = checked.val();
+					//console.log('simple:',selected_arrange_simple);
+					arrange();
+				});
+			})();
+			//column-size radios
+			(function(){
+				var container = $('#arrange-controls');
+				var radios = [];
+				container.append($('<label class="radio inline">Columns: </label>'));
+				var controls = $([2,3,4,6]).map(function(x,num){
+					var label = $('<label></label>').addClass('radio inline');
+					var radio = $('<input/>').attr({name:'columns','type':'radio', 'value':num}).addClass('arrange-columns-input').appendTo(label);
+					$('<span></span>').text(num).appendTo(label);
+					radios.push(radio);
+					return label;	
+				}).appendTo(container);
+				var radios = $(radios);
+				var defaultRadio = $(radios.get(2));
+				defaultRadio.prop('checked',true);
+				container.on('change', '.arrange-columns-input', function(){
+					var checked = container.find('.arrange-columns-input:checked');
+					selected_columns = checked.val();
+					//console.log('columns:',selected_columns);
+					arrange();
+				});
+			})();
 		});
 	</script>
 	<script src="lib/holder.js"></script>
@@ -67,6 +93,7 @@
 			This demo takes a second to load, but that's only because I'm using <a href="https://github.com/imsky/holder">Holder</a> for test images,
 			and we must wait for the images to load before the height of the elements can be calculated.
 		</p>
+		<div id="arrange-controls"></div>
 		<ul class="tiles">
 			<li class="tile">
 				<div>1</div>

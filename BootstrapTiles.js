@@ -15,7 +15,7 @@
 			}[columnCount];
 		})();
 		for(var i=0; i<columnCount; i++){
-			var columnElement = $('<ul></ul>').addClass(columnClass).appendTo(this.element);
+			var columnElement = $('<ul></ul>').addClass(columnClass).addClass('BootstrapTiles-Column').appendTo(this.element);
 			this.columns.push(new Column(columnElement,i+1));
 		}
 		this.placeTiles = function(tiles,sequentially){
@@ -59,7 +59,7 @@
 		};
 	}
 
-	var defaults = {columns:4};
+	var defaults = {columns:4,simple:false};
 	//here's the actual jQuery plugin
 	$.fn.BootstrapTiles = function(option,data){
 		//it has two usage patterns:
@@ -81,12 +81,12 @@
 				var settings = $.extend({}, defaults);
 				if(typeof option == 'object') settings = _.extend(settings, option);
 				var bt = new BootstrapTiles(tiles,container);
-				bt.arrange(settings.columns, true);
+				bt.arrange(settings.columns, settings.simple);
 				ul.data(dataKey,bt);
 			} else if (option == "arrange"){
-				var settings = $.extend({},defaults);
+				var settings = $.extend({}, defaults);
 				if(typeof data == 'object') settings = _.extend(settings, data);
-				bt.arrange(settings.columns, false);
+				bt.arrange(settings.columns, settings.simple);
 			}
 		});
 	};
